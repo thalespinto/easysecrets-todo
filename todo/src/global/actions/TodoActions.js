@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "uuid";
+
 export const AddTodoAction = (todo) => (dispatch, getState) => {
     const {
         Todo: { todos },
@@ -7,7 +9,7 @@ export const AddTodoAction = (todo) => (dispatch, getState) => {
     if (!hasTodo && todo !== "") {
         dispatch({
             type: "ADD_TODO",
-            payload: [{ id: todo, todo }, ...todos],
+            payload: [{ id: uuidv4(), todo }, ...todos],
         });
     }
 };
