@@ -13,7 +13,7 @@ import {
     EditTodoAction,
     RemoveTodoAction,
 } from "../../global/actions/TodoActions";
-import SplitButton from "../SplitButton/SplitButton";
+import ActionsMenu from "./components/ActionsMenu";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
 
@@ -117,7 +117,7 @@ export default function TodoCard({ todo }) {
                     </Tooltip>
                 </>
             ) : (
-                <SplitButton
+                <ActionsMenu
                     deleteCallBack={() => dispatch(RemoveTodoAction(todo))}
                     editCallBack={() => setEditing(true)}
                 />

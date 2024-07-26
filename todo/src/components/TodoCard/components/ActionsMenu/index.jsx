@@ -10,7 +10,7 @@ import DoneIcon from "@mui/icons-material/Done";
 import Delete from "@mui/icons-material/Delete";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
-export default function AccountMenu({ deleteCallBack, editCallBack }) {
+export default function ActionsMenu({ deleteCallBack, editCallBack }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
