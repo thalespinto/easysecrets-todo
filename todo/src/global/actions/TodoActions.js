@@ -26,3 +26,16 @@ export const RemoveTodoAction = (todo) => (dispatch, getState) => {
         });
     }
 };
+
+export const EditTodoAction = (todo) => (dispatch, getState) => {
+    const {
+        Todo: { todos },
+    } = getState();
+    console.log(todo);
+    if (todo !== "") {
+        dispatch({
+            type: "EDIT_TODO",
+            payload: [...todos.filter((record) => record.id !== todo.id), todo],
+        });
+    }
+};
