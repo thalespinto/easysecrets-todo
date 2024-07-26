@@ -1,10 +1,12 @@
-import './App.css';
+import TodoCard from "./components/TodoCard";
+import "./App.css";
 
 function App() {
-  return (
-    <div className="App">
-    </div>
-  );
+    return (
+        <div className="App">
+            <TodoCard />
+        </div>
+    );
 }
 
 export default App;
