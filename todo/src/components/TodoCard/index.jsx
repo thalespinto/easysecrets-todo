@@ -42,23 +42,23 @@ export default function TodoCard({ todo }) {
     };
 
     const onTitleInputChange = (event) => {
-        setEditedTodo({
-            id: todo.id,
+        setEditedTodo((state) => ({
+            id: state.id,
             todo: {
-                ...todo.todo,
+                ...state.todo,
                 title: event.target.value,
             },
-        });
+        }));
     };
 
     const onDescriptionInputChange = (event) => {
-        setEditedTodo({
-            id: todo.id,
+        setEditedTodo((state) => ({
+            id: state.id,
             todo: {
-                ...todo.todo,
+                ...state.todo,
                 description: event.target.value,
             },
-        });
+        }));
     };
 
     return (
