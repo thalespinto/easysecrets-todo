@@ -9,7 +9,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DoneIcon from "@mui/icons-material/Done";
 import Delete from "@mui/icons-material/Delete";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import RemoveDoneIcon from '@mui/icons-material/RemoveDone';
+import RemoveDoneIcon from "@mui/icons-material/RemoveDone";
 
 export default function ActionsMenu({
     deleteCallback,
@@ -43,7 +43,10 @@ export default function ActionsMenu({
                         aria-haspopup="true"
                         aria-expanded={open ? "true" : undefined}
                     >
-                        <KeyboardArrowDownIcon fontSize="medium" />
+                        <KeyboardArrowDownIcon
+                            fontSize="medium"
+                            sx={{ color: isDone ? "white" : "" }}
+                        />
                     </IconButton>
                 </Tooltip>
             </Box>
