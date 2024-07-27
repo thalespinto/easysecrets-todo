@@ -13,7 +13,7 @@ import {
     EditTodoAction,
     RemoveTodoAction,
 } from "../../global/actions/TodoActions";
-import SplitButton from "../SplitButton/SplitButton";
+import ActionsMenu from "./components/ActionsMenu";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
 
@@ -42,23 +42,23 @@ export default function TodoCard({ todo }) {
     };
 
     const onTitleInputChange = (event) => {
-        setEditedTodo({
-            id: todo.id,
+        setEditedTodo((state) => ({
+            id: state.id,
             todo: {
-                ...todo.todo,
+                ...state.todo,
                 title: event.target.value,
             },
-        });
+        }));
     };
 
     const onDescriptionInputChange = (event) => {
-        setEditedTodo({
-            id: todo.id,
+        setEditedTodo((state) => ({
+            id: state.id,
             todo: {
-                ...todo.todo,
+                ...state.todo,
                 description: event.target.value,
             },
-        });
+        }));
     };
 
     return (
@@ -117,7 +117,7 @@ export default function TodoCard({ todo }) {
                     </Tooltip>
                 </>
             ) : (
-                <SplitButton
+                <ActionsMenu
                     deleteCallBack={() => dispatch(RemoveTodoAction(todo))}
                     editCallBack={() => setEditing(true)}
                 />
