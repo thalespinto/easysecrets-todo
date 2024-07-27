@@ -33,9 +33,13 @@ export const EditTodoAction = (todo) => (dispatch, getState) => {
     } = getState();
     console.log(todo);
     if (todo !== "") {
+        const updatedTodos = todos.map((record) =>
+            record.id === todo.id ? todo : record
+        );
+
         dispatch({
             type: "EDIT_TODO",
-            payload: [...todos.filter((record) => record.id !== todo.id), todo],
+            payload: updatedTodos,
         });
     }
 };
