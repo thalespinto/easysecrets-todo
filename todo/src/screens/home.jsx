@@ -4,7 +4,7 @@ import AddTodoFab from "./components/AddTodoFab";
 
 const Home = () => {
     return (
-        <Box maxWidth={"800px"}>
+        <Box maxWidth={"600px"} margin={"auto"}>
             <TodoList />
             <AddTodoFab />
         </Box>
