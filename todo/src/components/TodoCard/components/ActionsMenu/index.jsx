@@ -9,8 +9,14 @@ import EditIcon from "@mui/icons-material/Edit";
 import DoneIcon from "@mui/icons-material/Done";
 import Delete from "@mui/icons-material/Delete";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import RemoveDoneIcon from '@mui/icons-material/RemoveDone';
 
-export default function ActionsMenu({ deleteCallBack, editCallBack }) {
+export default function ActionsMenu({
+    deleteCallback,
+    editCallback,
+    changeDoneCallback,
+    isDone,
+}) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -50,19 +56,30 @@ export default function ActionsMenu({ deleteCallBack, editCallBack }) {
                 transformOrigin={{ horizontal: "right", vertical: "top" }}
                 anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
             >
-                <MenuItem onClick={handleClose}>
-                    <ListItemIcon>
-                        <DoneIcon fontSize="small" />
-                    </ListItemIcon>
-                    Concluir
+                <MenuItem onClick={changeDoneCallback}>
+                    {isDone ? (
+                        <>
+                            <ListItemIcon>
+                                <RemoveDoneIcon fontSize="small" />
+                            </ListItemIcon>
+                            Desfazer
+                        </>
+                    ) : (
+                        <>
+                            <ListItemIcon>
+                                <DoneIcon fontSize="small" />
+                            </ListItemIcon>
+                            Concluir
+                        </>
+                    )}
                 </MenuItem>
-                <MenuItem onClick={editCallBack}>
+                <MenuItem onClick={editCallback}>
                     <ListItemIcon>
                         <EditIcon fontSize="small" />
                     </ListItemIcon>
                     Editar
                 </MenuItem>
-                <MenuItem onClick={deleteCallBack}>
+                <MenuItem onClick={deleteCallback}>
                     <ListItemIcon>
                         <Delete fontSize="small" />
                     </ListItemIcon>

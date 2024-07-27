@@ -17,15 +17,25 @@ import ActionsMenu from "./components/ActionsMenu";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
 
-const Card = styled(Muicard)(({ theme }) => ({
+const Card = styled(Muicard)(({ theme, editing, done }) => ({
     height: "120px",
-    backgroundColor: "#FAFAFA",
+    backgroundColor: done
+        ? theme.palette.success.light
+        : theme.palette.grey[100],
     width: "90%",
     maxWidth: "600px",
     "&:hover": {
-        backgroundColor: "#C1C1C1",
+        backgroundColor: done
+            ? editing
+                ? theme.palette.success.light
+                : theme.palette.success.main
+            : editing
+            ? theme.palette.grey[100]
+            : theme.palette.grey[300],
     },
-    color: theme.palette.text.primary,
+    color: done
+        ? theme.palette.success.contrastText
+        : theme.palette.text.primary,
     padding: "10px 20px",
     display: "flex",
     alignItems: "flex-start",
@@ -39,6 +49,18 @@ export default function TodoCard({ todo }) {
     const handleSend = () => {
         dispatch(EditTodoAction(editedTodo));
         setEditing(false);
+    };
+
+    const handleChangeDoneValue = () => {
+        const newValue = {
+            id: todo.id,
+            todo: {
+                ...todo.todo,
+                done: JSON.stringify(!JSON.parse(todo.todo.done)),
+            },
+        };
+        setEditedTodo(newValue);
+        dispatch(EditTodoAction(newValue));
     };
 
     const onTitleInputChange = (event) => {
@@ -62,7 +84,7 @@ export default function TodoCard({ todo }) {
     };
 
     return (
-        <Card>
+        <Card editing={editing} done={JSON.parse(todo.todo.done)}>
             <Box width="100%">
                 {editing ? (
                     <>
@@ -118,8 +140,10 @@ export default function TodoCard({ todo }) {
                 </>
             ) : (
                 <ActionsMenu
-                    deleteCallBack={() => dispatch(RemoveTodoAction(todo))}
-                    editCallBack={() => setEditing(true)}
+                    deleteCallback={() => dispatch(RemoveTodoAction(todo))}
+                    editCallback={() => setEditing(true)}
+                    changeDoneCallback={handleChangeDoneValue}
+                    isDone={JSON.parse(todo.todo.done)}
                 />
             )}
         </Card>

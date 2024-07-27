@@ -29,6 +29,7 @@ export default function AddTodoDialog({ open, setOpen }) {
                     const todo = {
                         ...formJson,
                         created_at: JSON.stringify(new Date()),
+                        done: JSON.stringify(false),
                     };
                     dispatch(AddTodoAction(todo));
 
