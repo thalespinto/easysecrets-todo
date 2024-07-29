@@ -4,7 +4,6 @@ export const AddTodoAction = (todo) => (dispatch, getState) => {
     const {
         Todo: { todos },
     } = getState();
-    console.log(todo);
     const hasTodo = todos.find((record) => record.todo === todo);
     if (!hasTodo && todo !== "") {
         dispatch({
@@ -18,7 +17,6 @@ export const RemoveTodoAction = (todo) => (dispatch, getState) => {
     const {
         Todo: { todos },
     } = getState();
-    console.log(todo);
     if (todo !== "") {
         dispatch({
             type: "REMOVE_TODO",
@@ -31,7 +29,6 @@ export const EditTodoAction = (todo) => (dispatch, getState) => {
     const {
         Todo: { todos },
     } = getState();
-    console.log(todo);
     if (todo !== "") {
         const updatedTodos = todos.map((record) =>
             record.id === todo.id ? todo : record
