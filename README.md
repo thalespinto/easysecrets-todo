@@ -1,28 +1,22 @@
 # easysecrets-todo
 
-## Padrão de Branch
-Os nomes das branches devem seguir o padrão:
-[tipo]/[objetivo]
 
-**Tipo:**
-- `feature`: Para adição de novas funcionalidades.
-- `fix`: Para correções de bugs.
-- `refact`: Para refatoração de código.
-- `delete`: Para remoção de código ou funcionalidades.
+## Tecnologias
+Tecnologias usadas no desenvolvimento do projeto:
+- `NodeJs`: v18.18.1
+- `npm`: v9.8.1
 
-**Objetivo:**
-- Descreva sucintamente o objetivo da branch, relacionado ao que está sendo criado ou corrigido.
+## Configurando o projeto
+Passos para rodar o projeto localmente:
 
+**Clone o repositório:**
+Clone o repositório e navegue até a pasta "todo".
 
-## Padrão de Commit
-Os commits devem seguir o padrão:
-[tipo]:[objetivo]
+**Instale as dependências:**
+Execute "npm install".
 
-**Tipo:**
-- `feature`: Para adição de novas funcionalidades.
-- `fix`: Para correções de bugs.
-- `refact`: Para refatoração de código.
-- `delete`: Para remoção de código ou funcionalidades.
+**Inicie o servidor:**
+Execute "npm start".
 
-**Objetivo:**
-- Descreva sucintamente o objetivo do commit, relacionado ao que está sendo criado, corrigido ou refatorado.
+**Acesse a aplicação:**
+A aplicação ficará disponível em http://localhost:3000.
