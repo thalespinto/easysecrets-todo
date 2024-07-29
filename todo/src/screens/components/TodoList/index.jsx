@@ -64,7 +64,7 @@ const TodoList = () => {
                         size="small"
                     >
                         {filters.map((filter) => (
-                            <MenuItem value={filter}>{filter}</MenuItem>
+                            <MenuItem key={filter} value={filter}>{filter}</MenuItem>
                         ))}
                     </Select>
                 </FormControl>

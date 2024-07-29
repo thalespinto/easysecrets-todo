@@ -32,8 +32,6 @@ export default function AddTodoDialog({ open, setOpen }) {
                         done: JSON.stringify(false),
                     };
                     dispatch(AddTodoAction(todo));
-
-                    console.log(formJson);
                 },
             }}
             fullWidth

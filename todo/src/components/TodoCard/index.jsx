@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { styled } from "@mui/material/styles";
 import {
     Card as Muicard,
@@ -42,12 +42,28 @@ const Card = styled(Muicard)(({ theme, editing, done }) => ({
 }));
 
 export default function TodoCard({ todo }) {
-    const [editedTodo, setEditedTodo] = useState(todo);
+    const formRef = useRef(null);
+
     const [editing, setEditing] = useState(false);
     const dispatch = useDispatch();
 
     const handleSend = () => {
-        dispatch(EditTodoAction(editedTodo));
+        formRef.current.requestSubmit();
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.currentTarget);
+        const formJson = Object.fromEntries(formData.entries());
+        const formTodo = {
+            id: todo.id,
+            todo: {
+                ...todo.todo,
+                title: formJson.title,
+                description: formJson.description,
+            },
+        };
+        dispatch(EditTodoAction(formTodo));
         setEditing(false);
     };
 
@@ -59,28 +75,7 @@ export default function TodoCard({ todo }) {
                 done: JSON.stringify(!JSON.parse(todo.todo.done)),
             },
         };
-        setEditedTodo(newValue);
         dispatch(EditTodoAction(newValue));
-    };
-
-    const onTitleInputChange = (event) => {
-        setEditedTodo((state) => ({
-            id: state.id,
-            todo: {
-                ...state.todo,
-                title: event.target.value,
-            },
-        }));
-    };
-
-    const onDescriptionInputChange = (event) => {
-        setEditedTodo((state) => ({
-            id: state.id,
-            todo: {
-                ...state.todo,
-                description: event.target.value,
-            },
-        }));
     };
 
     return (
@@ -88,30 +83,36 @@ export default function TodoCard({ todo }) {
             <Box width="100%">
                 {editing ? (
                     <>
-                        <Box
-                            display={"flex"}
-                            flexDirection={"column"}
-                            gap={"10px"}
+                        <form
+                            ref={formRef}
+                            action="submit"
+                            onSubmit={handleSubmit}
                         >
-                            <TextField
-                                id="outlined-basic"
-                                label="Título"
-                                variant="outlined"
-                                defaultValue={todo.todo.title}
-                                onChange={onTitleInputChange}
-                                size="small"
-                                required
-                            />
-                            <TextField
-                                id="outlined-basic"
-                                label="Descrição"
-                                variant="outlined"
-                                defaultValue={todo.todo.description}
-                                onChange={onDescriptionInputChange}
-                                size="small"
-                                multiline
-                            />
-                        </Box>
+                            <Box
+                                display={"flex"}
+                                flexDirection={"column"}
+                                gap={"10px"}
+                            >
+                                <TextField
+                                    id="outlined-basic"
+                                    name="title"
+                                    label="Título"
+                                    variant="outlined"
+                                    defaultValue={todo.todo.title}
+                                    size="small"
+                                    required
+                                />
+                                <TextField
+                                    id="outlined-basic"
+                                    name="description"
+                                    label="Descrição"
+                                    variant="outlined"
+                                    defaultValue={todo.todo.description}
+                                    size="small"
+                                    multiline
+                                />
+                            </Box>
+                        </form>
                     </>
                 ) : (
                     <>
@@ -133,7 +134,7 @@ export default function TodoCard({ todo }) {
                         </IconButton>
                     </Tooltip>
                     <Tooltip title="Enviar">
-                        <IconButton aria-label="enviar" onClick={handleSend}>
+                        <IconButton onClick={handleSend} aria-label="enviar">
                             <SendOutlinedIcon />
                         </IconButton>
                     </Tooltip>
