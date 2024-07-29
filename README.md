@@ -20,3 +20,6 @@ Execute "npm start".
 
 **Acesse a aplicação:**
 A aplicação ficará disponível em http://localhost:3000.
+
+## Redux DevTools
+Opcionalmente você pode instalar a extensão "Redux DevTools" em seu navegador para visualizar o estado da aplicação em tempo real.
